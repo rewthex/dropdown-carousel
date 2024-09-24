@@ -1,0 +1,10 @@
+.menu-items {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  max-width: fit-content;
+}
+
+.hidden {
+  display: none;
+}
