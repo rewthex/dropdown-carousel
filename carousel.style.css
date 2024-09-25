@@ -29,7 +29,10 @@ img::selection {
 }
 
 .backward {
+	display: flex;
+	justify-self: right;
 	grid-area: backward;
+	font-size: 7rem;
 }
 
 .slide {
@@ -39,7 +42,10 @@ img::selection {
 }
 
 .forward {
+	display: flex;
+	justify-self: left;
 	grid-area: forward;
+	font-size: 7rem;
 }
 
 .indicators {

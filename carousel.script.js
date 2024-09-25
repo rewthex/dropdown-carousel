@@ -20,7 +20,7 @@ const screenController = (slideDiv, indicatorsDiv) => {
 	slideDiv.appendChild(images[currentImage]);
 	indicatorsDiv.children[currentImage].classList.add('circle-active')
 
-	const rotateCarousel = (direction) => {
+	const changeImage = (direction) => {
 		slideDiv.removeChild(images[currentImage]);
 		indicatorsDiv.children[currentImage].classList.remove('circle-active')
 		if (direction === 'backward') {
@@ -34,24 +34,20 @@ const screenController = (slideDiv, indicatorsDiv) => {
 	};
 
 	setInterval(()=> {
-		rotateCarousel('forward')
+		changeImage('forward')
 	}, 5000)
 
-  return { rotateCarousel }
+  return { changeImage }
 };
 
 const initializeEventListeners = (controller) => {
 	const backward = document.querySelector('.backward');
 	const forward = document.querySelector('.forward');
-	backward.addEventListener('click', () => controller.rotateCarousel('backward'));
-	forward.addEventListener('click', () => controller.rotateCarousel('forward'));
+	backward.addEventListener('click', () => controller.changeImage('backward'));
+	forward.addEventListener('click', () => controller.changeImage('forward'));
 };
 
 const slideDiv = document.querySelector('.slide');
 const indicatorsDiv = document.querySelector('.indicators')
 const controller = screenController(slideDiv, indicatorsDiv);
 initializeEventListeners(controller);
-
-
-
-console.log(indicatorsDiv.children[0])
