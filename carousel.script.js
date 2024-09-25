@@ -12,27 +12,30 @@ const createImgArray = () => {
 	return [fallImg, galaxyImg, lakeImg];
 };
 
-const screenController = (slideDiv) => {
+const screenController = (slideDiv, indicatorsDiv) => {
 	const images = createImgArray();
-  if (!images.length) {
-    slideDiv.innerText = 'No images :('
-    return;
-  }
 	let imagesLength = images.length;
 	let currentImage = 0;
 
-	slideDiv.append(images[currentImage]);
+	slideDiv.appendChild(images[currentImage]);
+	indicatorsDiv.children[currentImage].classList.add('circle-active')
 
 	const rotateCarousel = (direction) => {
 		slideDiv.removeChild(images[currentImage]);
+		indicatorsDiv.children[currentImage].classList.remove('circle-active')
 		if (direction === 'backward') {
 			currentImage = (currentImage - 1 + imagesLength) % imagesLength;
 		}
 		if (direction === 'forward') {
 			currentImage = (currentImage + 1) % imagesLength;
 		}
-		slideDiv.append(images[currentImage]);
+		indicatorsDiv.children[currentImage].classList.add('circle-active')
+		slideDiv.appendChild(images[currentImage]);
 	};
+
+	setInterval(()=> {
+		rotateCarousel('forward')
+	}, 5000)
 
   return { rotateCarousel }
 };
@@ -45,9 +48,10 @@ const initializeEventListeners = (controller) => {
 };
 
 const slideDiv = document.querySelector('.slide');
-const controller = screenController(slideDiv);
+const indicatorsDiv = document.querySelector('.indicators')
+const controller = screenController(slideDiv, indicatorsDiv);
 initializeEventListeners(controller);
 
-setInterval(()=> {
-  controller.rotateCarousel('forward')
-}, 5000)
+
+
+console.log(indicatorsDiv.children[0])

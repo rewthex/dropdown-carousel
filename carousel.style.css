@@ -10,7 +10,10 @@ img::selection {
 	height: 100vh;
 	display: grid;
 	grid-template-columns: 1fr 8fr 1fr;
-	grid-template-areas: 'backward slide forward';
+	grid-template-rows: 1fr 6fr 1fr;
+	grid-template-areas: 'backward .          forward'
+											 'backward slide      forward'
+											 'backward indicators forward';
 }
 
 .backward,
@@ -37,4 +40,24 @@ img::selection {
 
 .forward {
 	grid-area: forward;
+}
+
+.indicators {
+	display: flex;
+	justify-content: center;
+	gap: 15px;
+	grid-area: indicators;
+	
+}
+
+.circle {
+	height: 50px;
+	width: 50px;
+	border: 1px solid black;
+	border-radius: 50%;
+	display: inline-block;
+}
+
+.circle-active {
+	background-color: black;
 }
