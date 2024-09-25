@@ -1,0 +1,36 @@
+* {
+	margin: 0;
+}
+
+.frame {
+	height: 100vh;
+	display: grid;
+	grid-template-columns: 1fr 8fr 1fr;
+	grid-template-areas: 'backward slide forward';
+}
+
+.backward,
+.forward {
+	fill: black;
+	justify-self: center;
+	align-self: center;
+}
+
+.backward:hover,
+.forward:hover {
+  opacity: 0.5;
+}
+
+.backward {
+	grid-area: backward;
+}
+
+.slide {
+	grid-area: slide;
+	align-self: center;
+  justify-self: center;
+}
+
+.forward {
+	grid-area: forward;
+}

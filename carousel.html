@@ -3,9 +3,35 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Document</title>
+		<title>Carousel</title>
 		<script src="carousel.script.js" defer></script>
 		<link rel="stylesheet" href="carousel.style.css" />
 	</head>
-	<body></body>
+	<body>
+		<div class="frame">
+			<div class="backward" data-direction="backward">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					viewBox="0 -960 960 960"
+          width="125px"
+				>
+					<path
+						d="M400-80 0-480l400-400 61 61.67L122.67-480 461-141.67 400-80Z"
+					/>
+				</svg>
+			</div>
+			<div class="slide"></div>
+			<div class="forward" data-direction="forward">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					viewBox="0 -960 960 960"
+					width="125px"
+				>
+					<path
+						d="m309.67-81.33-61-61.67L587-481.33 248.67-819.67l61-61.66 400 400-400 400Z"
+					/>
+				</svg>
+			</div>
+		</div>
+	</body>
 </html>
