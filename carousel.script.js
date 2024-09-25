@@ -1,38 +1,53 @@
-const frameDiv = document.querySelector('.frame');
-const slideDiv = document.querySelector('.slide');
-
 const createImgElement = (src, alt) => {
-	const image = document.createElement('img');
-	image.src = src;
-	image.alt = alt;
-	return image;
+	const imageEl = document.createElement('img');
+	imageEl.src = src;
+	imageEl.alt = alt;
+	return imageEl;
 };
 
-const fallImg = createImgElement('./images/fallhighway.jpg', 'fall highway');
-const galaxyImg = createImgElement('./images/galaxy.jpg', 'galaxy');
-const lakeImg = createImgElement('./images/lakedock.jpg', 'lake dock');
-
-const images = [fallImg, galaxyImg, lakeImg];
-let imagesLength = images.length
-let currentImage = 0;
-slideDiv.append(images[currentImage]);
-
-const backwardSvg = document.querySelector('.backward');
-const forwardSvg = document.querySelector('.forward');
-
-const rotateCarousel = (e) => {
-  slideDiv.removeChild(images[currentImage])
-  const direction = e.currentTarget.dataset.direction
-  if (direction === 'backward') {
-    currentImage = (currentImage - 1 + imagesLength) % imagesLength; 
-  }
-  if (direction === 'forward') {
-    currentImage = (currentImage + 1) % imagesLength
-  }
-  slideDiv.append(images[currentImage])
+const createImgArray = () => {
+	const fallImg = createImgElement('./images/fallhighway.jpg', 'fall highway');
+	const galaxyImg = createImgElement('./images/galaxy.jpg', 'galaxy');
+	const lakeImg = createImgElement('./images/lakedock.jpg', 'lake dock');
+	return [fallImg, galaxyImg, lakeImg];
 };
 
-backwardSvg.addEventListener('click', rotateCarousel);
-forwardSvg.addEventListener('click', rotateCarousel);
+const screenController = (slideDiv) => {
+	const images = createImgArray();
+  if (!images.length) {
+    slideDiv.innerText = 'No images :('
+    return;
+  }
+	let imagesLength = images.length;
+	let currentImage = 0;
 
+	slideDiv.append(images[currentImage]);
 
+	const rotateCarousel = (direction) => {
+		slideDiv.removeChild(images[currentImage]);
+		if (direction === 'backward') {
+			currentImage = (currentImage - 1 + imagesLength) % imagesLength;
+		}
+		if (direction === 'forward') {
+			currentImage = (currentImage + 1) % imagesLength;
+		}
+		slideDiv.append(images[currentImage]);
+	};
+
+  return { rotateCarousel }
+};
+
+const initializeEventListeners = (controller) => {
+	const backward = document.querySelector('.backward');
+	const forward = document.querySelector('.forward');
+	backward.addEventListener('click', () => controller.rotateCarousel('backward'));
+	forward.addEventListener('click', () => controller.rotateCarousel('forward'));
+};
+
+const slideDiv = document.querySelector('.slide');
+const controller = screenController(slideDiv);
+initializeEventListeners(controller);
+
+setInterval(()=> {
+  controller.rotateCarousel('forward')
+}, 5000)
